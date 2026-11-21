@@ -1,4 +1,4 @@
-FROM registry.ci.openshift.org/ocp/builder:rhel-9-golang-1.26-openshift-5.0 AS builder
+FROM registry.ci.openshift.org/ocp/builder:rhel-9-golang-1.26-openshift-5.1 AS builder
 
 WORKDIR /build
 COPY . .
@@ -11,7 +11,7 @@ RUN cd openshift/capi-ipam-conversion-webhook && \
   GO111MODULE=on CGO_ENABLED=0 GOOS=${GOOS} GOPROXY=${GOPROXY} go build \
   -mod=readonly -ldflags="-w -s" -o=/build/capi-ipam-conversion-webhook .
 
-FROM registry.ci.openshift.org/ocp/5.0:base-rhel9
+FROM registry.ci.openshift.org/ocp/5.1:base-rhel9
 
 LABEL description="Cluster API Controller Manager"
 
